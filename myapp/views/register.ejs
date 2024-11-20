@@ -3,80 +3,21 @@
 <!-- Include Head -->
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link width="" rel="shortcut icon" href="./images/logo-mercado-liebre.jpg" />
-
-	<title> Mercado Libre Argentina</title>
-	<!-- Font Awesome Stylesheet -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-	<!-- Bootstrap Grid Stylesheet -->
-	<link rel="stylesheet" href="/css/bootstrap-grid.min.css">
-	<!-- Own Stylesheet -->
-	<link rel="stylesheet" href="/css/app.css">
+	<%- include('./partials/head') %>
 </head>
 
+
 <body>
-	<!-- Header -->
-	<header class="main-header">
-		<div class="container">
-			<div class="row align-items-center">
-				<div class="col-5 col-md-2">
-					<a href="index" class="main-header_home-link">
-						<img src="./images/logo-mercado-liebre.svg">
-					</a>
-				</div>
+	<header>
+	<% if (locals.user != undefined) { %>
+	  
+	<%- include('./partials/headerLogin') %>
 	
-				<div class="col-7 col-md-6">
-					<form action="search-results.html" method="GET" class="search-form">
-						<input type="text" name="search" placeholder="Buscar productos, marcas y más"
-							class="search-form_input">
-						<button type="submit" class="search-form_button"><i class="fas fa-search"></i></button>
-					</form>
-				</div>
+	<% } else { %>
+		 
+	<%- include('./partials/header') %>
 	
-				<div class="col-12 col-md-4">
-					<a class="main-header_credit-link">
-						<i class="fas fa-hand-holding-usd"></i>
-						Todas las opiniones en un solo lugar.
-					</a>
-				</div>
-			</div>
-	
-			<button class="btn-toggle-navbar">
-				<i class="fas fa-bars"></i>
-			</button>
-	
-			<nav class="main-navbar">
-				<ul class="left-navbar">
-					<li><a href="index">Todos los productos</a></li>
-					<!-- solo logueado <li><a href="">Cargar productos</a></li> -->
-				</ul>
-			
-				<ul class="right-navbar">
-					<!-- Estos li deben verse solo si el usuario está logueado 
-								<li> 
-									Nombre del usuario <i class="fas fa-user"></i>
-								</li>
-								<li>
-									<form action="" method="post">
-										<button class="logout" type="submit">
-											Cerrar sesión <i class="fas fa-sign-in-alt"></i>
-										</button>
-									</form>
-								</li>
-							-->
-					<!-- Los li con register y loguin deben ocultarse si el usuario está logueado -->
-					<li>
-						<a href="register">Creá tu cuenta <i class="far fa-address-card"></i>
-						</a>
-					</li>
-					<li>
-						<a href="login">Ingresá <i class="fas fa-sign-in-alt"></i></a>
-					</li>
-				</ul>
-			</nav>
-		</div>
+	<% } %>
 	</header>
 	<!-- /Header -->
 
@@ -87,16 +28,16 @@
 				<h2 class="products-title">Registrate</h2>
 			</div>
 			
-			<form class="form-label" action="/users/register" method="POST" >
+			<form class="form-label" action="/users/login" method="POST" >
 				<div class="form-input">
-				  <input id="name" class="input" type="text" name="name" placeholder="usuario" />
+				  <input id="nombre" class="input" type="text" name="nombre" placeholder="usuario" />
 			  </div>
 				<div class="form-input">
 					<input id="email" class="input" type="email" name="email" placeholder="email" />
 				</div>
 		
 				<div class="form-input">
-					<input id="password" class="input" type="password" name="password" placeholder="contraseña" />
+					<input id="contra" class="input" type="password" name="contra" placeholder="contraseña" />
 				</div>
 				<button type="text" class="submit">Crear</button>
 			  </form>

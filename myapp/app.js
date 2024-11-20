@@ -35,7 +35,15 @@ app.use(session({
   secret: "proyecto",
   resave: false,
   saveUninitialized: true
-}))
+}));
+app.use(function(req, res, next) {
+  if (req.session.user != undefined) {
+    res.locals.user = req.session.user
+  }
+
+  return next();
+})
+
 
 // error handler
 app.use(function(err, req, res, next) {

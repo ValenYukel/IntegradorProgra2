@@ -10,15 +10,16 @@ const userController = {
     },
     registerPost: (req, res) => {
         let forms = req.body;
-        forms.password = bcryptjs.hashSync(forms.password, 10);
+        forms.password = bcryptjs.hashSync(forms.contra, 10);
 
-        db.User.create(forms)
+        db.Usuario.create(forms)
         .then((results) =>{
+            return res.send(forms)
             return res.redirect("/users/login");
+
         })
         .catch((err) => {
             return console.log(err);
-            ;
         });       
         
     },
@@ -27,13 +28,13 @@ const userController = {
         let filtro = {
             where: {email: forms.email}
         }
-        db.User.findOne(filtro)
+        db.Usuario.findOne(filtro)
         .then((result) => {
 
             if (!result) {
                 return res.send("No hay mail")
             } else {
-                let check = bcryptjs.compareSync(forms.password , result.password)
+                let check = bcryptjs.compareSync(forms.contra , result.contra)
                 if (check) {
                     req.session.user = result.dataValues;
                     return res.redirect("/");
