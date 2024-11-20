@@ -1,5 +1,5 @@
 const db = require('../database/models');
-//const bcryptjs = require('bcryptjs');
+const bcryptjs = require('bcryptjs');
 
 const userController = {
     register: (req, res)=>{
@@ -9,10 +9,10 @@ const userController = {
         return res.render("login")
     },
     registerPost: (req, res) => {
-        let form = req.body;
-        form.password = bcryptjs.hashSync(form.password, 10);
+        let forms = req.body;
+        forms.password = bcryptjs.hashSync(forms.password, 10);
 
-        db.User.create(form)
+        db.User.create(forms)
         .then((results) =>{
             return res.redirect("/users/login");
         })
@@ -23,9 +23,9 @@ const userController = {
         
     },
     loginPost: (req, res) => {
-        let form = req.body;
+        let forms = req.body;
         let filtro = {
-            where: {email: form.email}
+            where: {email: forms.email}
         }
         db.User.findOne(filtro)
         .then((result) => {
@@ -33,7 +33,7 @@ const userController = {
             if (!result) {
                 return res.send("No hay mail")
             } else {
-                let check = bcryptjs.compareSync(form.password , result.password)
+                let check = bcryptjs.compareSync(forms.password , result.password)
                 if (check) {
                     req.session.user = result.dataValues;
                     return res.redirect("/");
