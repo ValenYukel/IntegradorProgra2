@@ -5,7 +5,15 @@
 
 
 <body>
-	<%- include('./partials/header')%>
+	<% if (locals.user != undefined) { %>
+
+		<%- include('./partials/headerLogin') %>
+		
+	<% } else { %>
+
+		<%- include('./partials/header') %>
+		
+		<% } %>
 
 	<!-- Novedades -->
 	<div class="container products-wrapper">
@@ -17,20 +25,20 @@
 
 			<form class="form" action="/catalogo/productAdd" method="POST">
 				<div class="input-nombre">
-				  <input id="nombre" class="input" type="text" name="nombre" placeholder="Nombre" />
+				  <input id="nombre" class="input" type="text" name="nombre" placeholder="Nombre" required/>			
 				</div>
 				<div class="input-imagen">
-				  <input id="imagen" class="input" type="text" name="imagen" placeholder="Ruta De Imagen" />
+				  <input id="imagen" class="input" type="text" name="imagen" placeholder="Ruta De Imagen" required/>
 				</div>
 				<div class="input-descripcion">
-				  <input id="descripcion" class="input" type="text" name="descripcion" placeholder="Descripcion" />
+				  <input id="descripcion" class="input" type="text" name="descripcion" placeholder="Descripcion" required/>
 				</div>
 				
-				<button type="text" class="submit">Agregar Producto</button>
-	
-	
-			  </form>
+				<button type="text" class="submit">Agregar Producto</button>	
+			</form>
 
+
+			
 
 	<%- include('./partials/footer')%>
 </body>
