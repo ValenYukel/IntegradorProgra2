@@ -5,21 +5,25 @@ const userController = require("../controllers/userControllers");
 const catalogoController = {
 
     showFormCreate: function (req, res) {
-        if (req.session) {
-            return res.render("product-add");
+        if (!req.session.user) {
+            return res.redirect("/users/login");
         }
-        return res.redirect("/"); 
+        return res.render("product-add"); 
     },
     store: function (req, res) {
+        
+        if (!req.session.user) {
+            return res.redirect("/users/login"); 
+        }
+
         let producto_nuevo = {
             info : req.body,
             usuario_id: req.session.user.id,
         };
-
    
     db.Producto.create(producto_nuevo)
     .then(function (results) {
-        return res.redirect("/");
+        return res.redirect("/catalogo");
     })
     .catch(function (err) {
       console.log(err);

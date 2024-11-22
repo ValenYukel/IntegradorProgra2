@@ -6,6 +6,9 @@ const userController = {
         return res.render("register")
     },
     login: (req, res)=>{
+        if (req.session.user) {
+            return res.redirect("/catalogo/productAdd");
+        } 
         return res.render("login")
     },
     registerPost: (req, res) => {
