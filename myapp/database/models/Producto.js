@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     };
+    
     let config = {
         tableName: 'productos',
         timestamps: false
