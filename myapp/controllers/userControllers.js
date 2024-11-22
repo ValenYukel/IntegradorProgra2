@@ -6,7 +6,7 @@ const userController = {
         return res.render("register")
     },
     login: (req, res)=>{
-        if (req.session.user) {
+        if (req.session) { //estoy muy seguro q lo de adentro esta mal pero dsp lo arreglo
             return res.redirect("/catalogo/productAdd");
         } 
         return res.render("login")
