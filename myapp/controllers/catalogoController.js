@@ -5,24 +5,27 @@ const userController = require("../controllers/userControllers");
 const catalogoController = {
 
     showFormCreate: function (req, res) {
-        if (!req.session || !req.session.user) {
-            return res.redirect("/users/login");
+        //if (!req.session || !req.session.user) {
+            //return res.redirect("/users/login");
            
-        }
+       // }
         return res.render("product-add"); 
     },
     store: function (req, res) {
-        if (!req.session || !req.session.user) {
-            return res.redirect("/users/login"); 
-        }
+       // if (!req.session || !req.session.user) {
+          //  return res.redirect("/users/login"); 
+        //}
         let producto_nuevo = {
-            info : req.body,
-            usuario_id: req.session.user.id,
+            nombre: req.body.nombre,
+            descripcion: req.body.descripcion,
+            imagen: req.body.imagen,
+            usuario_id: req.session.user.id  
         };
     
     db.Producto.create(producto_nuevo)
     .then(function (results) {
-        return res.redirect("/catalogo");
+        console.log(results)
+        return res.render("/");
     })
     .catch(function (err) {
       console.log(err);
