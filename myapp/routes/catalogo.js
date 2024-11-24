@@ -7,5 +7,6 @@ const catalogoController = require('../controllers/catalogoController');
 
 router.get('/productAdd', catalogoController.showFormCreate);
 router.post('/productAdd',catalogoController.store)
+router.get('/search', catalogoController.search_bar);
 
 module.exports = router;
