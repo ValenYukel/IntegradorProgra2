@@ -24,22 +24,22 @@
 				<h2 class="products-title">Resultados de búsqueda:</h2>
 			</div>
 
-			<% for( let i = 0; i < buscado.length; i++ ) { %>
+			<% for (let i = 0; i < buscado.length; i++) { %>
 				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/catalogo/detalle">
-							<figure class="product-box_image">
-								<img src="images/products/<%buscado.Producto[i].dataValues.imagen%>" alt="<%buscado.Producto[i].dataValues.nombre%>">
-							</figure>
-							<article class="product-box_data">
-								<h2><% buscado.nombre[i] %></h2>
-								<p><% buscado.descripcion[i] %></p>
-								<p>Usuario:</p>
-							</article>
-						</a>
-					</section>
+				  <section class="product-box">
+					<a href="/catalogo/detalle">
+					  <figure class="product-box_image">
+						<img src="/images/products/<%= buscado[i].imagen %>" alt="<%= buscado[i].nombre %>">
+					  </figure>
+					  <article class="product-box_data">
+						<h2><%= buscado[i].nombre %></h2>
+						<p><%= buscado[i].descripcion %></p>
+						<p>Usuario: <%= buscado[i].usuario_id %></p>
+					  </article>
+					</a>
+				  </section>
 				</div>
-			<% } %>
+			  <% } %>
 		
 
 
