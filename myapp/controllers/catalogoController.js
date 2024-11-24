@@ -1,5 +1,5 @@
 const db = require('../database/models');
-const op = db.Sequelize.Op;
+const Op = db.Sequelize.Op;
 const userController = require("../controllers/userControllers");
 
 const catalogoController = {
@@ -40,8 +40,9 @@ const catalogoController = {
             let rq = req.query.search;
         
             let filtrado = {
-                where: [{nombre: {[op.like]: `%${rq}%`}
-                    }],
+                where: [
+                    {nombre: {[Op.like]: `%${rq}%`} }
+                ],
                 order: [
                         ['createdAt', 'DESC']
                     ]
@@ -58,18 +59,28 @@ const catalogoController = {
             if (cantidad == 0) {
                 return res.send("No hay resultados para su criterio de búsqueda");
             } else {
-                return res.render("search-results", {buscado: result});            
+                console.log(req.query.search)
+                return res.render("search-results", {buscado: result, palabra: req.query.search});            
             }
-
-           
 
         }) 
             .catch(function(err) {
               return console.log(err);
             })
-        
 
+    },
 
+    detalle: (req,res) => {
+
+    let id = req.params.idProducto;
+
+   db.Producto.findByPk(id)
+   .then(function(results) {
+       return res.render("product", {buscado: results})
+   }).catch(function(err) {
+      return console.log(err);
+    ;
+   });
 
     }
 
