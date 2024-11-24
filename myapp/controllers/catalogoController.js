@@ -56,7 +56,7 @@ const catalogoController = {
             let cantidad = result.length;
     
             if (cantidad == 0) {
-                return res.render("search-results", {nulo: "No hay resultados para su criterio de búsqueda"});   
+                return res.send("No hay resultados para su criterio de búsqueda");
             } else {
                 return res.render("search-results", {buscado: result});            
             }
