@@ -49,7 +49,11 @@ const catalogoController = {
             }
         
             
-            db.Producto.findAll(filtrado)
+            db.Producto.findAll(filtrado, {
+                include: [
+                    {association: "usuario"},
+                ]
+               })
             .then(function(result) {
             
             console.log("LOS ENCONTRADOS SON:", result)
@@ -61,8 +65,7 @@ const catalogoController = {
             } else {
                 console.log(req.query.search)
                 return res.render("search-results", {buscado: result, palabra: req.query.search});            
-            }
-
+            }   
         }) 
             .catch(function(err) {
               return console.log(err);
@@ -74,13 +77,19 @@ const catalogoController = {
 
     let id = req.params.idProducto;
 
-   db.Producto.findByPk(id)
+   db.Producto.findByPk(id,{
+    include: [
+        {association: "usuario"},
+    ]
+   })
    .then(function(results) {
+    console.log("Estos son los results", results)
        return res.render("product", {buscado: results})
    }).catch(function(err) {
       return console.log(err);
     ;
    });
+
 
     }
 
