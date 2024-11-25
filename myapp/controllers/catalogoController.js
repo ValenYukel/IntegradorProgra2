@@ -44,7 +44,7 @@ const catalogoController = {
     db.Producto.create(producto_nuevo)
     .then(function (results) {
         console.log(results)
-        return res.render("/");
+        return res.render("/catalogo");
     })
     .catch(function (err) {
       console.log(err);
