@@ -4,8 +4,12 @@ const bcryptjs = require('bcryptjs');
 const userController = {
     register: (req, res)=>{
         return res.render("register")
-    },  
+    },
     login: (req, res)=>{
+        // if (req.session.user != undefined) {
+            //return res.redirect("/catalogo/productAdd");
+           
+       // } 
         return res.render("login")
     },
     registerPost: (req, res) => {
@@ -24,6 +28,10 @@ const userController = {
         
     },
     loginPost: (req, res) => {
+         // if (req.session.user != undefined) {
+            //return res.redirect("/catalogo/productAdd");
+           
+       // }
         let forms = req.body;
         let filtro = {
             where: {email: forms.email}
