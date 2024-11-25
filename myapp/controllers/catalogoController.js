@@ -2,8 +2,24 @@ const db = require('../database/models');
 const Op = db.Sequelize.Op;
 const userController = require("../controllers/userControllers");
 
+
 const catalogoController = {
 
+    index: function(req, res){
+        let filtrado = {
+            include: [
+              {association: "usuario"}],
+            order:[["createdAt", "DESC"]],
+          };
+
+        db.Producto.findAll(filtrado)
+        .then(function(results){
+            return res.render('index', {productos: results});
+        })
+        .catch(function(err) {
+            return console.log(err);
+        });
+},
     showFormCreate: function (req, res) {
         //if (req.session.user == undefined) {
             //return res.redirect("/users/login");
