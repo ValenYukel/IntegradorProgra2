@@ -10,11 +10,12 @@ const catalogoController = {
             include: [
               {association: "usuario"}],
             order:[["createdAt", "DESC"]],
+            limit: 5,
           };
 
         db.Producto.findAll(filtrado)
         .then(function(results){
-            return res.render('index', {productos: results});
+            return res.render('index', {producto: results});
         })
         .catch(function(err) {
             return console.log(err);
