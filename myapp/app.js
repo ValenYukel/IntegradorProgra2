@@ -4,9 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var catalogoRouter = require('./routes/catalogo');
+
 
 
 var app = express();
@@ -20,6 +18,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var catalogoRouter = require('./routes/catalogo');
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -36,13 +38,24 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+app.use((req, res, next) => {
+  console.log('Sesión actual:', req.session);
+  next();
+});
+
+
+
+
 app.use(function(req, res, next) {
   if (req.session.user != undefined) {
     res.locals.user = req.session.user
   }
-
+  
   return next();
 })
+
+
+
 
 
 // error handler

@@ -14,11 +14,9 @@ const userController = {
     },
     registerPost: (req, res) => {
         let forms = req.body;
-        forms.password = bcryptjs.hashSync(forms.contra, 10);
-
+        forms.contra = bcryptjs.hashSync(forms.contra, 10);
         db.Usuario.create(forms)
         .then((results) =>{
-            return res.send(forms)
             return res.redirect("/users/login");
 
         })
@@ -38,16 +36,17 @@ const userController = {
         }
         db.Usuario.findOne(filtro)
         .then((result) => {
-
+          //  return res.send(result)
             if (!result) {
-                return res.send("No hay mail")
+                return res.send("No existe una cuenta asociada a ese mail")
             } else {
-                let check = bcryptjs.compareSync(forms.contra , result.contra)
-                if (check) {
+                let chequeo = bcryptjs.compareSync(forms.contra, result.contra)
+                if (chequeo) {
+                    return res.send(req.session)
                     req.session.user = result.dataValues;
-                    return res.redirect("/");
+                    return res.redirect("/catalogo");
                 } else {
-                    return res.send("La contraseña es incorrecta");
+                    return res.send(result.contra);
                 }
             }
 
@@ -60,7 +59,7 @@ const userController = {
     },
     logout: (req, res)=>{
         req.session.destroy();
-        return res.redirect("/")
+        return res.redirect("/catalogo")
     }
 }
 
