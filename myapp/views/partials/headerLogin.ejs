@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <div class="col-5 col-md-2">
                 <a href="index" class="main-header_home-link">
-                    <img src="./images/banner.jpg">
+                    <img src="/images/banner.jpg">
                 </a>
             </div>
 
@@ -29,7 +29,7 @@
 
         <nav class="main-navbar">
             <ul class="left-navbar">
-                <li><a href="../catalogo">Todos los productos</a></li>
+                <li><a href="../../catalogo">Todos los productos</a></li>
                 
                //* <li><a href="COMPLETAR">Cargar productos</a></li> //*
             </ul>
@@ -37,10 +37,10 @@
             <ul class="right-navbar">
         
                             <li> 
-                                Bienvenido <%= locals.user.nombre  %> <i class="fas fa-user"></i>
+                               <a href="../../users/perfil"> Bienvenido <%= locals.user.nombre%>! </a><i class="fas fa-user"></i>
                             </li>
                             <li>
-                                <form action="/users/logout" method="post">
+                                <form action="../../users/logout" method="post">
                                     <button class="logout" type="submit">
                                         Cerrar sesión <i class="fas fa-sign-in-alt"></i>
                                     </button>

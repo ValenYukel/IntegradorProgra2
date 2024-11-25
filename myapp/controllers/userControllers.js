@@ -59,7 +59,9 @@ const userController = {
     logout: (req, res)=>{
         req.session.destroy();
         return res.redirect("/catalogo")
-    }
+    },
+    perfil:  (req, res)=>{
+        return res.render("perfil")}
 }
 
 module.exports = userController;
