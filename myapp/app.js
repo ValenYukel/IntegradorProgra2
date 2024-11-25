@@ -19,18 +19,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var catalogoRouter = require('./routes/catalogo');
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/catalogo', catalogoRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
 const session = require("express-session");
 
 app.use(session({
@@ -38,12 +28,6 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
-app.use((req, res, next) => {
-  console.log('Sesión actual:', req.session);
-  next();
-});
-
-
 
 
 app.use(function(req, res, next) {
@@ -54,9 +38,19 @@ app.use(function(req, res, next) {
   return next();
 })
 
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var catalogoRouter = require('./routes/catalogo');
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/catalogo', catalogoRouter);
 
 
 
+app.use(function(req, res, next) {
+  next(createError(404));
+});
 
 // error handler
 app.use(function(err, req, res, next) {

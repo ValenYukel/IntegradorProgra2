@@ -16,7 +16,7 @@ const userController = {
         let forms = req.body;
         forms.contra = bcryptjs.hashSync(forms.contra, 10);
         db.Usuario.create(forms)
-        .then((results) =>{
+        .then((result) =>{
             return res.redirect("/users/login");
 
         })
@@ -42,11 +42,10 @@ const userController = {
             } else {
                 let chequeo = bcryptjs.compareSync(forms.contra, result.contra)
                 if (chequeo) {
-                    return res.send(req.session)
                     req.session.user = result.dataValues;
                     return res.redirect("/catalogo");
                 } else {
-                    return res.send(result.contra);
+                    return res.send("Contraseña incorrecta");
                 }
             }
 
