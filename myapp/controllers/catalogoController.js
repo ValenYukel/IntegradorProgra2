@@ -10,7 +10,7 @@ const catalogoController = {
             include: [
               {association: "usuario"}],
             order:[["createdAt", "DESC"]],
-            limit: 5,
+            limit: 4,
           };
 
         db.Producto.findAll(filtrado)
