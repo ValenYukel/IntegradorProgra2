@@ -10,7 +10,7 @@ const catalogoController = {
             include: [
               {association: "usuario"}],
             order:[["createdAt", "DESC"]],
-            limit: 5,
+            limit: 4,
           };
 
         db.Producto.findAll(filtrado)
@@ -22,16 +22,16 @@ const catalogoController = {
         });
 },
     showFormCreate: function (req, res) {
-        //if (req.session.user == undefined) {
-            //return res.redirect("/users/login");
+        if (req.session.user == undefined) {
+            return res.redirect("/users/login");
            
-       // }
+        }
         return res.render("product-add"); 
     },
     store: function (req, res) {
-       // if (req.session.user == undefined) {
-          //  return res.redirect("/users/login"); 
-        //}
+         if (req.session.user == undefined) {
+            return res.redirect("/users/login"); 
+        }
         let producto_nuevo = {
             nombre: req.body.nombre,
             descripcion: req.body.descripcion,
@@ -44,7 +44,7 @@ const catalogoController = {
     db.Producto.create(producto_nuevo)
     .then(function (results) {
         console.log(results)
-        return res.render("/");
+        return res.render("/catalogo");
     })
     .catch(function (err) {
       console.log(err);
