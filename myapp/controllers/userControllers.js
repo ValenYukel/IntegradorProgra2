@@ -14,6 +14,14 @@ const userController = {
     },
     registerPost: (req, res) => {
         let forms = req.body;
+        if (!forms.nombre) {
+            res.send("Completar el campo de usuario")
+        } 
+        if (!forms.email) {
+                res.send("Completar el campo de email")}
+        if (!forms.contra) {
+            res.send("Completar el campo de contraseña")}
+
         forms.contra = bcryptjs.hashSync(forms.contra, 10);
         db.Usuario.create(forms)
         .then((result) =>{
