@@ -69,7 +69,21 @@ const userController = {
         return res.redirect("/catalogo")
     },
     perfil:  (req, res)=>{
-        return res.render("perfil")}
-}
+        return res.render("perfil")
+    },
+    perfilAjeno: (req, res) => {
+        let id = req.params.idPerfil;
+        let filtro = {
+            where: {id: id}
+        }
+        db.Usuario.findOne(filtro)
+        .then(function(result) {
+            return res.render("perfilAjeno", {usuario: result})
+        })
+        .catch(function(err) {
+            return console.log(err)
+        });
+    }
+};
 
 module.exports = userController;

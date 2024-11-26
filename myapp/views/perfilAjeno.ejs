@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+	<%- include('./partials/head') %>
+</head>
+
+
+<body>
+	<header>
+	<% if (locals.user != undefined) { %>
+	  
+	<%- include('./partials/headerLogin') %>
+	
+	<% } else { %>
+		 
+	<%- include('./partials/header') %>
+	
+	<% } %>
+	</header>
+    <div class="container products-wrapper">
+    <h2 class="products-title">Perfil del usuario</h2>
+    <h2>Nombre:  <%= usuario.nombre  %></h2>
+    <h2>Mail: <%= usuario.email  %></h2>
+</div>
+    <%- include('./partials/footer') %>
+</body>
