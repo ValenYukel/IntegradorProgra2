@@ -34,7 +34,7 @@
 					  <article class="product-box_data">
 						<h2>Producto: <%= buscado[i].nombre %></h2>
 						<p>Descripcion: <%= buscado[i].descripcion %></p>
-						<p><a href="/users/profile/<% buscado[i].usuario_id %>"> Usuario: <%= buscado[i].usuario_id %> </a></p>
+						<strong><a href="/users/perfil/<% buscado[i].usuario.id%>"> Publicado por: <%=buscado[i].usuario.nombre%> </a></strong>
 					  </article>
 					</a>
 				  </section>
