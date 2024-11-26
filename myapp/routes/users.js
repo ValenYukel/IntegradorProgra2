@@ -9,14 +9,12 @@ router.get('/login', userController.login);
 
 router.get('/register', userController.register);
 
-router.get('/perfil', userController.perfil);
-
 router.post("/register", userController.registerPost);
 
 router.post("/login", userController.loginPost);
 
 router.post("/logout", userController.logout);
 
-//router.get("/profile/:idProfile", userController.profile);
+router.get("/perfil/:idProfile", userController.perfil);
 
 module.exports = router;
