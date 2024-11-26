@@ -44,7 +44,7 @@ const catalogoController = {
     db.Producto.create(producto_nuevo)
     .then(function (results) {
         console.log(results)
-        return res.render("/catalogo");
+        return res.redirect("/catalogo");
     })
     .catch(function (err) {
       console.log(err);
@@ -56,7 +56,10 @@ const catalogoController = {
 
             let rq = req.query.search;
         
-            let filtrado = {
+            let filtrado = {                
+                include: [
+                    {association: "usuario"},
+                ],
                 where: [
                     {nombre: {[Op.like]: `%${rq}%`} }
                 ],
@@ -66,11 +69,7 @@ const catalogoController = {
             }
         
             
-            db.Producto.findAll(filtrado, {
-                include: [
-                    {association: "usuario"},
-                ]
-               })
+            db.Producto.findAll(filtrado) 
             .then(function(result) {
             
             console.log("LOS ENCONTRADOS SON:", result)
